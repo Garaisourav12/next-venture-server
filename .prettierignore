@@ -8,3 +8,4 @@ yarn.lock
 *.config.js
 *.config.cjs
 *.md
+src/prisma/generated

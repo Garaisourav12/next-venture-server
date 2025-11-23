@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { isProd } from '../utils/envUtils';
 
 // Custom error interface
 export interface AppError extends Error {
@@ -8,12 +9,12 @@ export interface AppError extends Error {
 }
 
 // Factory function to create operational errors easily
-export const createError = (message: string, statusCode = 500): AppError => {
+export const throwError = (message: string, statusCode = 500): any => {
   const err = new Error(message) as AppError;
   err.statusCode = statusCode;
   err.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error';
   err.isOperational = true;
-  return err;
+  throw err;
 };
 
 export const routeNotFoundErrorHandler = (req: Request, res: Response) => {
@@ -37,7 +38,7 @@ export const globalErrorHandler = (
   const message = err.message || 'Something went wrong';
 
   // Optional: avoid leaking stack traces in production
-  if (process.env.NODE_ENV === 'production') {
+  if (isProd()) {
     return res.status(statusCode).json({
       status: err.status,
       message,
