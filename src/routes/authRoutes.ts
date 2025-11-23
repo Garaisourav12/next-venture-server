@@ -34,11 +34,18 @@ authRouter.post(
   authorizeTo([UserType.ADMIN]),
   authControllers.createUserByAdmin,
 );
-authRouter.post(
+authRouter.patch(
   '/updateUserType',
   verifyToken,
   authorizeTo([UserType.ADMIN]),
   authControllers.updateUserType,
+);
+
+authRouter.delete(
+  'deleteUser/:id',
+  verifyToken,
+  authorizeTo([UserType.ADMIN]),
+  authControllers.deleteUser,
 );
 
 export default authRouter;

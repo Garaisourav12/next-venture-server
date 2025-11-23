@@ -157,3 +157,19 @@ export const updateUserType = async (
     });
   }, next);
 };
+
+export const deleteUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  await safetyWrapper(async () => {
+    await authServices.deleteUser(req.params.id);
+
+    res.status(200).json({
+      message: 'User deleted successfully',
+      success: true,
+      data: null,
+    });
+  }, next);
+};

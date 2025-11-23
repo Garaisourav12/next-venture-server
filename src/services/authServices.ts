@@ -91,3 +91,11 @@ export const getUserById = async (id: string): Promise<User> => {
   if (!user) return throwError('User not found', 404);
   return user;
 };
+
+// --------------------------------------------------
+// DELETE USER
+// --------------------------------------------------
+export const deleteUser = async (id: string): Promise<void> => {
+  const result = await userRepository.delete({ id });
+  if (result.affected === 0) return throwError('User not found', 404);
+};
