@@ -3,7 +3,6 @@
     "target": "ES2022", // Modern JS target
     "module": "NodeNext", // Node.js ES module support
     "moduleResolution": "NodeNext",
-    "outDir": "dist", // Compiled files output
     "rootDir": "src", // Source files root
     "strict": true, // Enable all strict type-checking
     "noImplicitAny": true, // No implicit 'any'
@@ -27,5 +26,5 @@
     "emitDecoratorMetadata": true
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules"]
 }

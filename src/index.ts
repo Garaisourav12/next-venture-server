@@ -1,6 +1,7 @@
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import express, { Response } from 'express';
+import { connectDB } from './db';
 import {
   globalErrorHandler,
   routeNotFoundErrorHandler,
@@ -14,7 +15,7 @@ const port = process.env.PORT || 8000;
 
 (async () => {
   // Connect to MongoDB
-  // await connectDB();
+  await connectDB();
 
   // Middleware
   app.use(express.json());
@@ -35,12 +36,6 @@ const port = process.env.PORT || 8000;
   app.use(routeNotFoundErrorHandler);
 
   app.listen(port, () => {
-    // Log on production only
-    if (process.env.NODE_ENV === 'production') {
-      process.stdout.write(`⚠️ Server started [Production Build]\n`);
-    } else {
-      console.log(`🚀 Server running on port ${port}`);
-      console.log(`http://localhost:${port}`);
-    }
+    console.log(`🚀 Server running on port ${port}`);
   });
 })();
